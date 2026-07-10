@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+   <meta charset="UTF-8">
+   <title>Level 1</title>
+</head>
+<body>
+
+<h1>Level 1</h1>
+<p>Errate die Zahl!</p>
+
+<input type="number" id="zahl">
+<button onclick="pruefen()">Prüfen</button>
+
+<p id="ergebnis"></p>
+
+<script>
+let geheimzahl = -57276937566;
+
+function pruefen() {
+   let tipp = Number(document.getElementById("zahl").value);
+
+   if (tipp < geheimzahl) {
+       document.getElementById("ergebnis").innerHTML = "Zu niedrig!";
+   } else if (tipp > geheimzahl) {
+       document.getElementById("ergebnis").innerHTML = "Zu hoch!";
+   } else {
+       document.getElementById("ergebnis").innerHTML = "🎉 Richtig! Nächstes Level...";
+
+       setTimeout(function () {
+           window.location.href = "end.html";
+       }, 1500);
+   }
+}
+</script>
+
+</body>
+</html>
