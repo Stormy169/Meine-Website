@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Fang den Kasten</title>
+
+<style>
+
+body{
+margin:0;
+overflow:hidden;
+font-family:Arial;
+}
+
+#punkte{
+position:absolute;
+top:20px;
+left:20px;
+font-size:30px;
+}
+
+#timer{
+position:absolute;
+top:60px;
+left:20px;
+font-size:30px;
+}
+
+#highscore{
+position:absolute;
+top:100px;
+left:20px;
+font-size:30px;
+}
+
+#kasten{
+
+width:80px;
+height:80px;
+background:red;
+position:absolute;
+cursor:pointer;}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="punkte">Punkte: 0</div>
+<div id="timer">Zeit: 30</div>
+<div id="highscore">Highscore: 0</div>
+
+<div id="kasten"></div>
+
+<script>
+
+let punkte=0;
+let zeit=30;
+
+let highscore=localStorage.getItem("highscore");
+
+if(highscore==null){
+highscore=0;
+}
+
+document.getElementById("highscore").innerHTML="Highscore: "+highscore;
+let kasten=document.getElementById("kasten");
+
+function neuePosition(){
+
+let x=Math.random()*(window.innerWidth-80);
+let y=Math.random()*(window.innerHeight-80);
+kasten.style.left=x+"px";
+kasten.style.top=y+"px";
+}
+
+kasten.onclick=function(){
+
+if(zeit<=0) return;
+punkte++;
+document.getElementById("punkte").innerHTML="Punkte: "+punkte;
+neuePosition();
+}
+
+neuePosition();
+let countdown=setInterval(function(){
+zeit--;
+document.getElementById("timer").innerHTML="Zeit: "+zeit;
+if(zeit<=0){
+
+clearInterval(countdown);
+
+kasten.style.display="none";
+
+if(punkte>highscore){
+
+localStorage.setItem("highscore",punkte);
+alert("🎉 Neuer Highscore: "+punkte);
+}else{
+
+alert("Spiel vorbei!\nPunkte: "+punkte);
+}
+
+}
+},1000);
+</script>
+</body>
+</html>

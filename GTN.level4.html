@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Level 4</title>
+<style>
+
+body {
+
+margin: 0;
+padding: 20px;
+font-family: Arial, sans-serif;
+text-align: center;
+background-color: white; color: black;}
+h1 {font-size: 2rem;}
+p {font-size: 1.2rem;}
+input, button {width: 90%;
+
+max-width: 350px;
+padding: 15px;
+margin: 10px;
+font-size: 1.2rem;
+border-radius: 10px;}
+
+ </style>
+
+</head>
+<body>
+
+<h1>Level 4</h1>
+<p>Errate die Zahl!</p>
+
+<input type="number" id="zahl">
+<button onclick="pruefen()">Prüfen</button>
+
+<p id="ergebnis"></p>
+
+<script>
+let geheimzahl = 49;
+
+function pruefen() {
+   let tipp = Number(document.getElementById("zahl").value);
+
+   if (tipp < geheimzahl) {
+       document.getElementById("ergebnis").innerHTML = "Zu niedrig!";
+   } else if (tipp > geheimzahl) {
+       document.getElementById("ergebnis").innerHTML = "Zu hoch!";
+   } else {
+       document.getElementById("ergebnis").innerHTML = "🎉 Richtig! Nächstes Level...";
+
+       setTimeout(function () {
+           window.location.href = "level5.html";
+       }, 1500);
+   }
+}
+</script>
+
+</body>
+</html>
